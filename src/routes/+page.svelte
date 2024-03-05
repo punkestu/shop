@@ -4,7 +4,7 @@
 </script>
 
 <section
-	class="flex flex-col-reverse md:flex-row items-center gap-4 px-4 py-6 md:py-12 lg:py-24 min-h-screen"
+	class="flex flex-col-reverse md:flex-row items-center justify-center gap-4 px-4 py-6 md:py-12 lg:py-24 min-h-screen"
 >
 	<aside class="md:w-1/3 lg:w-1/2">
 		<h2 class="text-4xl font-semibold mb-2">Shopping🛍</h2>
@@ -26,36 +26,36 @@
 		voluptatum alias obcaecati, maiores consequuntur consectetur repellat voluptas. Omnis, deleniti
 		aliquid?
 	</p>
-	<div class="w-full flex gap-4">
+	<div class="w-full flex gap-4 flex-col md:flex-row">
 		<a
 			href="/"
-			class="w-1/3 bg-gradient-to-b from-slate-800 to-slate-700 p-4 flex flex-col gap-2 shadow-md shadow-slate-800 hover:shadow-lg hover:shadow-slate-950 duration-500"
+			class="md:w-1/3 bg-gradient-to-b from-slate-800 to-slate-700 p-4 flex flex-col gap-2 shadow-md shadow-slate-800 hover:shadow-lg hover:shadow-slate-950 duration-500"
 		>
-			<img class="w-full h-96 object-cover" src={Products[1]} alt="product 1" />
+			<img class="w-full h-[25vh] object-cover" src={Products[1]} alt="product 1" />
 			<h3 class="text-xl font-medium">Product 1</h3>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, reprehenderit?</p>
 		</a>
 		<a
 			href="/"
-			class="w-1/3 bg-gradient-to-b from-slate-800 to-slate-700 p-4 flex flex-col gap-2 shadow-md shadow-slate-800 hover:shadow-lg hover:shadow-slate-950 duration-500"
+			class="md:w-1/3 bg-gradient-to-b from-slate-800 to-slate-700 p-4 flex flex-col gap-2 shadow-md shadow-slate-800 hover:shadow-lg hover:shadow-slate-950 duration-500"
 		>
-			<img class="w-full h-96 object-cover" src={Products[0]} alt="product 1" />
+			<img class="w-full h-[25vh] object-cover" src={Products[0]} alt="product 1" />
 			<h3 class="text-xl font-medium">Product 2</h3>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, reprehenderit?</p>
 		</a>
 		<a
 			href="/"
-			class="w-1/3 bg-gradient-to-b from-slate-800 to-slate-700 p-4 flex flex-col gap-2 shadow-md shadow-slate-800 hover:shadow-lg hover:shadow-slate-950 duration-500"
+			class="md:w-1/3 bg-gradient-to-b from-slate-800 to-slate-700 p-4 flex flex-col gap-2 shadow-md shadow-slate-800 hover:shadow-lg hover:shadow-slate-950 duration-500"
 		>
-			<img class="w-full h-96 object-cover" src={Products[2]} alt="product 1" />
+			<img class="w-full h-[25vh] object-cover" src={Products[2]} alt="product 1" />
 			<h3 class="text-xl font-medium">Product 3</h3>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, reprehenderit?</p>
 		</a>
 	</div>
 </section>
 
-<section class="px-4 py-6 md:py-12 lg:py-24 flex gap-8 items-start">
-	<div class="w-2/3 flex flex-col">
+<section class="px-4 py-6 md:py-12 lg:py-24 flex flex-col md:flex-row gap-x-8 items-start">
+	<div class="md:w-2/3 flex flex-col">
 		<h2 class="text-2xl font-semibold mb-2">Collab with us🤝</h2>
 		<p class="text-justify">
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur illo magni quibusdam harum
@@ -66,7 +66,7 @@
 		</p>
 	</div>
 	<form
-		class="flex flex-col w-1/3 items-center justify-center gap-2 mt-2"
+		class="flex flex-col w-full md:w-1/3 items-center justify-center gap-2 mt-2"
 		on:submit={(e) => {
 			e.preventDefault();
 		}}
