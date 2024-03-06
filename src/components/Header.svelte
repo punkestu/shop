@@ -3,7 +3,7 @@
 	<nav>
 		<ul class="flex gap-2 md:gap-4">
 			<li><a class="hover:underline" href="/">Home</a></li>
-			<li><a class="hover:underline" href="/products">Products</a></li>
+			<li><a class="hover:underline" href="/product">Products</a></li>
 			<li><a class="hover:underline" href="/cart">Cart</a></li>
 		</ul>
 	</nav>
