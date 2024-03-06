@@ -51,7 +51,7 @@
 		placeholder="Search..."
 	/>
 	<button type="button" class="bg-slate-800 px-4 py-2" on:click={() => (isOpen = true)}
-		>Filter</button
+		>Filter ({selectedCategories.length})</button
 	>
 </section>
 
