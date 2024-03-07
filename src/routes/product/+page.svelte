@@ -19,7 +19,7 @@
 </script>
 
 <Shade bind:isOpen>
-	<div class="bg-slate-50 z-50 text-slate-900 p-4 w-1/4">
+	<div class="animate-popup bg-slate-50 z-50 text-slate-900 p-4 w-1/4">
 		<h2 class="text-2xl font-bold">Filter</h2>
 		<input type="text" bind:value={searchCategory} />
 		<div class="flex flex-wrap gap-4">
