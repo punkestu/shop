@@ -1,9 +1,27 @@
 <script>
 	import Products from '$lib/data/products.json';
 	import Shade from '../../components/Shade.svelte';
+	import { onMount } from 'svelte';
+	import { cart } from '$lib/store/cart';
+
+	/**
+	 * @type {any[]}
+	 */
+	let cartProducts = [];
+	onMount(() => {
+		cartProducts = JSON.parse(localStorage.getItem('cart') || '[]') || [];
+		cart.update((cart) => {
+			cart = cartProducts;
+			return cart;
+		});
+	});
+
 	let search = '';
 	let searchCategory = '';
-	let isOpen = false;
+	let filterIsOpen = false;
+	let addCartIsOpen = false;
+	let selectedProduct = -1;
+	let selectedQty = 0;
 	$: filteredProducts = Products.filter((product) =>
 		product.name.toLowerCase().includes(search.toLowerCase())
 	).filter((product) =>
@@ -18,7 +36,7 @@
 	let selectedCategories = [];
 </script>
 
-<Shade bind:isOpen>
+<Shade bind:isOpen={filterIsOpen}>
 	<div class="animate-popup bg-slate-50 z-50 text-slate-900 p-4 w-1/4">
 		<h2 class="text-2xl font-bold">Filter</h2>
 		<input type="text" bind:value={searchCategory} />
@@ -43,6 +61,44 @@
 	</div>
 </Shade>
 
+<Shade bind:isOpen={addCartIsOpen}>
+	<div class="animate-popup bg-slate-50 z-50 text-slate-900 p-4 w-1/4 flex flex-col">
+		<h2 class="text-2xl font-bold">{Products[selectedProduct].name}</h2>
+		<input type="number" bind:value={selectedQty} />
+		<button
+			on:click={() => {
+				if (selectedQty > 0) selectedQty--;
+			}}>-</button
+		>
+		<button
+			on:click={() => {
+				selectedQty++;
+			}}>+</button
+		>
+		<button
+			type="button"
+			class="bg-slate-800 px-4 py-2 text-slate-50"
+			on:click={() => {
+				let productIndex = cartProducts.findIndex((product) => product.id === selectedProduct);
+				if (productIndex < 0) {
+					if (selectedQty > 0)
+						cartProducts = [...cartProducts, { id: selectedProduct, qty: selectedQty }];
+				} else {
+					if (selectedQty === 0) cartProducts.splice(productIndex, 1);
+					else cartProducts[productIndex].qty = selectedQty;
+				}
+				localStorage.setItem('cart', JSON.stringify(cartProducts));
+				cart.update((cart) => {
+					cart = cartProducts;
+					return cart;
+				});
+				selectedQty = 0;
+				addCartIsOpen = false;
+			}}>Add</button
+		>
+	</div>
+</Shade>
+
 <section class="flex gap-4 p-4">
 	<input
 		type="text"
@@ -50,7 +106,7 @@
 		bind:value={search}
 		placeholder="Search..."
 	/>
-	<button type="button" class="bg-slate-800 px-4 py-2" on:click={() => (isOpen = true)}
+	<button type="button" class="bg-slate-800 px-4 py-2" on:click={() => (filterIsOpen = true)}
 		>Filter ({selectedCategories.length})</button
 	>
 </section>
@@ -78,7 +134,15 @@
 						<p class="text-lg font-bold">${product.price}</p>
 					</div>
 				</div>
-				<button type="button" class="bg-slate-800 px-4 py-2">Add to Cart</button>
+				<button
+					type="button"
+					class="bg-slate-800 px-4 py-2"
+					on:click={() => {
+						selectedProduct = product.id;
+						selectedQty = cartProducts.find((p) => p.id === product.id)?.qty || 0;
+						addCartIsOpen = true;
+					}}>Add to Cart</button
+				>
 			</div>
 		</div>
 	{/each}
