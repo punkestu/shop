@@ -63,7 +63,7 @@
 
 <Shade bind:isOpen={addCartIsOpen}>
 	<div class="animate-popup bg-slate-50 z-50 text-slate-900 p-4 w-1/4 flex flex-col">
-		<h2 class="text-2xl font-bold">{Products[selectedProduct].name}</h2>
+		<h2 class="text-2xl font-bold">{Products.find((p) => p.id === selectedProduct)?.name}</h2>
 		<input type="number" bind:value={selectedQty} />
 		<button
 			on:click={() => {
