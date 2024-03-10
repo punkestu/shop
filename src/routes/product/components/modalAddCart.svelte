@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	export let addCartIsOpen = false;
 	/**
-	 * @type {{id: number;name: string}[]}
+	 * @type {{id: number;name: string;price: number}[]}
 	 */
 	export let products = [];
 	export let selectedProduct = -1;
@@ -13,18 +13,22 @@
 	 * @type {{id: number; qty: number}[]}
 	 */
 	export let cartProducts = [];
-    onMount(() => {
+	onMount(() => {
 		cartProducts = JSON.parse(localStorage.getItem('cart') || '[]') || [];
 		cart.update((cart) => {
 			cart = cartProducts;
 			return cart;
 		});
 	});
+
+	$: product = products.find((p) => p.id === selectedProduct);
 </script>
 
 <Shade bind:isOpen={addCartIsOpen}>
 	<div class="animate-popup bg-slate-50 z-50 text-slate-900 p-4 w-1/4 flex flex-col">
-		<h2 class="text-2xl font-bold">{products.find((p) => p.id === selectedProduct)?.name}</h2>
+		<h2 class="text-2xl font-bold mb-2">
+			{product?.name} <span class="text-lg font-medium">| ${product?.price}</span>
+		</h2>
 		<div class="flex w-full justify-between mb-2">
 			<button
 				class="w-1/4 bg-slate-800 px-4 py-2 text-slate-50"
