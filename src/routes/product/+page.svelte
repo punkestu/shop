@@ -1,6 +1,6 @@
 <script>
 	import Products from '$lib/data/products.json';
-	import Shade from '../../components/Shade.svelte';
+	import Shade from '$lib/components/Shade.svelte';
 	import { onMount } from 'svelte';
 	import { cart } from '$lib/store/cart';
 
