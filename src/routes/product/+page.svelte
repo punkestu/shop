@@ -64,17 +64,21 @@
 <Shade bind:isOpen={addCartIsOpen}>
 	<div class="animate-popup bg-slate-50 z-50 text-slate-900 p-4 w-1/4 flex flex-col">
 		<h2 class="text-2xl font-bold">{Products.find((p) => p.id === selectedProduct)?.name}</h2>
-		<input type="number" bind:value={selectedQty} />
-		<button
-			on:click={() => {
-				if (selectedQty > 0) selectedQty--;
-			}}>-</button
-		>
-		<button
-			on:click={() => {
-				selectedQty++;
-			}}>+</button
-		>
+		<div class="flex w-full justify-between mb-2">
+			<button
+				class="w-1/4 bg-slate-800 px-4 py-2 text-slate-50"
+				on:click={() => {
+					if (selectedQty > 0) selectedQty--;
+				}}>-</button
+			>
+			<input class="text-center w-1/2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" bind:value={selectedQty} />
+			<button
+				class="w-1/4 bg-slate-800 px-4 py-2 text-slate-50"
+				on:click={() => {
+					selectedQty++;
+				}}>+</button
+			>
+		</div>
 		<button
 			type="button"
 			class="bg-slate-800 px-4 py-2 text-slate-50"
